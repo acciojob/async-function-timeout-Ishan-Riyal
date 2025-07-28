@@ -35,25 +35,29 @@
     <div id="output"></div>
 
     <script>
+      // Helper function to wait
       function wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
 
+      // Main function
       async function showMessageAfterDelay() {
         const text = document.getElementById('text').value;
         const delay = parseInt(document.getElementById('delay').value, 10);
         const output = document.getElementById('output');
 
+        // Validation
         if (!text || isNaN(delay)) {
           output.innerText = 'Please enter both message and delay.';
           return;
         }
 
-        output.innerText = 'Waiting...';
+        output.innerText = 'Waiting...'; // So Cypress doesn't expect empty
         await wait(delay);
         output.innerText = text;
       }
 
+      // Attach event listener
       document.getElementById('btn').addEventListener('click', showMessageAfterDelay);
     </script>
   </body>
