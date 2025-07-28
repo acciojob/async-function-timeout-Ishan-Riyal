@@ -1,20 +1,60 @@
 <!DOCTYPE html>
-
 <html>
   <head>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+    <title>Async Message Delay</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
 
+      form {
+        margin-bottom: 20px;
+      }
+
+      input, button {
+        padding: 10px;
+        margin-right: 10px;
+        font-size: 1rem;
+      }
+
+      #output {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
   <body>
-    <!-- the entire body must be written by student -->
     <form onsubmit="return false">
       <input type="text" id="text" placeholder="Text" />
-      <input type="number" id="delay" placeholder="Delay" />
+      <input type="number" id="delay" placeholder="Delay (ms)" />
       <button type="button" id="btn">Submit</button>
     </form>
 
     <div id="output"></div>
 
-    <script type="text/javascript" src="./script.js"></script>
+    <script>
+      function wait(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      async function showMessageAfterDelay() {
+        const text = document.getElementById('text').value;
+        const delay = parseInt(document.getElementById('delay').value, 10);
+        const output = document.getElementById('output');
+
+        if (!text || isNaN(delay)) {
+          output.innerText = 'Please enter both message and delay.';
+          return;
+        }
+
+        output.innerText = 'Waiting...';
+        await wait(delay);
+        output.innerText = text;
+      }
+
+      document.getElementById('btn').addEventListener('click', showMessageAfterDelay);
+    </script>
   </body>
 </html>
