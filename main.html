@@ -2,28 +2,7 @@
 <html>
   <head>
     <title>Async Message Delay</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-      }
-
-      form {
-        margin-bottom: 20px;
-      }
-
-      input, button {
-        padding: 10px;
-        margin-right: 10px;
-        font-size: 1rem;
-      }
-
-      #output {
-        margin-top: 20px;
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <form onsubmit="return false">
@@ -34,31 +13,6 @@
 
     <div id="output"></div>
 
-    <script>
-      // Helper function to wait
-      function wait(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-
-      // Main function
-      async function showMessageAfterDelay() {
-        const text = document.getElementById('text').value;
-        const delay = parseInt(document.getElementById('delay').value, 10);
-        const output = document.getElementById('output');
-
-        // Validation
-        if (!text || isNaN(delay)) {
-          output.innerText = 'Please enter both message and delay.';
-          return;
-        }
-
-        output.innerText = 'Waiting...'; // So Cypress doesn't expect empty
-        await wait(delay);
-        output.innerText = text;
-      }
-
-      // Attach event listener
-      document.getElementById('btn').addEventListener('click', showMessageAfterDelay);
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
