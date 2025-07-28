@@ -12,7 +12,7 @@ async function showMessageAfterDelay() {
     return;
   }
 
-  output.innerText = 'Waiting...';
+  output.innerText = ''; // keep it empty as expected by Cypress
   await wait(delay);
   output.innerText = text;
 }
